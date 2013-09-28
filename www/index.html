@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+      demo of RecordPermission cordova phone-gap plugin
+    
+      Created by Keenan Wyrobek, September 2013.
+      MIT licensed
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <style type="text/css" media="screen">
+            *{
+                margin-top:100px;
+                font-size: 24px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+        </div>
+        <script type="text/javascript" src="cordova-2.1.0.js"></script>
+        <script type="text/javascript" src="js/RecordPermission.js"></script>
+        <script type="text/javascript">
+        
+        document.addEventListener("deviceready", onDeviceReady, false);
+        document.addEventListener("resume", onDeviceReady, false); // If they say no to your micorphone request and they later say ok via settings this will let your software detect that. 
+        
+        var parentElement = document.getElementById('app');
+        
+        function onDeviceReady(){
+            console.log('onDeviceReady()');
+
+            recordPermission({
+                success: function(answer){
+                    console.log('permission = '+answer);
+                    if (!answer) parentElement.innerHTML = 'microphone is required for this app. Please go to "Settings" => "Privacy" => "Microphone" and turn on this app.';
+                    else parentElement.innerHTML = 'microphone permission given';
+                },
+                error: function(error){
+                    console.log('error = '+JSON.stringify(error));
+                    parentElement.innerHTML = 'error = '+JSON.stringify(error);
+                }
+            });
+        }
+        </script>
+    </body>
+</html>
