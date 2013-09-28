@@ -19,7 +19,7 @@
     NSArray *vComp = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
 
     if ([[vComp objectAtIndex:0] intValue] < 7) {
-        // before iOS when this permission was not required
+        // before iOS7 when this permission was not required or setable by the user
         [self performSelectorOnMainThread:@selector(doSuccessCallback:) withObject:@"True" waitUntilDone:NO];
     } else {
         
@@ -35,6 +35,7 @@
             }];
             
         } @catch (id exception) {
+            NSLog(@"recordPermission try error");
             CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_JSON_EXCEPTION messageAsString:[exception reason]];
             NSString* javaScript = [pluginResult toErrorCallbackString:command.callbackId];
             [self writeJavascript:javaScript];
@@ -43,7 +44,6 @@
 }
 
 -(void) doSuccessCallback:(NSString*)granted {
-    NSLog(@"doing success callback");
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:granted];
     NSString* javaScript = [pluginResult toSuccessCallbackString:self.callbackId];
     [self writeJavascript:javaScript];

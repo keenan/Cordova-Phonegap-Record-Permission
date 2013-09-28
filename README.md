@@ -1,6 +1,8 @@
 ## PhoneGap Cordova RecordPermission Plugin ##
  * by Keenan Wyrobek
 
+This plugin lets you decide when to prompt the user for, and/or check the status of the new microphone privacy permissions in iOS7
+
 ## About this Plugin ##
 In iOS7 the user will get a permission request the first time your app attempts to access the microphone.
 
@@ -11,7 +13,7 @@ This plugin lets you ask for permission and find out if permission is given at t
 
 ## Using the Plugin ##
 
-The plugin creates a function window.recordPermission(params) method. It takes one object with the following two properties.
+The plugin creates window.recordPermission(params). It takes one object with the following two functions as properties.
  * success: (required) This function will be called with one param - a boolean with the current microphone permission state.
  * error: (required) This function is called if there is an error. I don't know of any conditions that would call this. iOS < 7 should be handled gracefully
 
@@ -29,7 +31,7 @@ Example:
 
 ## Compatibility ##
 
- * This plug in has been tested with Cordova/PhoneGap 2.1.0 and should support 2.x project.
+ * This plug in has been tested with Cordova/PhoneGap 2.1.0 and should support 2.x projects.
  * It has been tested on iOS 5.1, 6.0, 6.1 & 7.0
 
 ## Adding the Plugin to your project ##
@@ -38,7 +40,7 @@ Example:
 2. Add the .js files to your "www" folder on disk, and add reference(s) to the .js files in your html file(s).
 3. Go to Cordova.plist under Resources in Xcode - Under Plugins dictionary add RecordPermission:RecordPermission
 
-The demo folder contains a www folder you can drop into a fresh Cordova project to test out this plugin. You will still need to manually complete step 1 & 3 above.
+Drop the www folder into a fresh Cordova project to test out this plugin. You will still need to manually complete step 1 & 3 above.
 
 ## LICENSE ##
 
